@@ -35,6 +35,24 @@ async function queryLikes() {
     console.log(error);
   }
 }
+// Find all users who like the song with the title "Song 1".
+
+const AllUsersLikeSong1 = async () => {
+    try {
+      const songs = await prisma.song.findMany({
+        where: {
+          title: "Song 1",
+        },
+        include: {
+          likedByUser: true,
+        },
+      });
+      console.log(songs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 // addSongLike();
-queryLikes();
+// queryLikes();
+AllUsersLikeSong1();
