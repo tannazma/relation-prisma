@@ -66,6 +66,22 @@ const runQuery = async () => {
     },
   });
   console.log(petsThatBelongTo17YearOld);
+
+  // Create a new owner with a pet
+
+  const newOwnerWithAPet = await prisma.owner.create({
+    data: {
+      name: "Albert",
+      age: 21,
+      pets: {
+        create: {
+          name: "Fifi",
+          kind: "Dog",
+        },
+      },
+    },
+  });
+  console.log(newOwnerWithAPet);
 };
 
 runQuery();
