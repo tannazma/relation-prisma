@@ -55,6 +55,17 @@ const runQuery = async () => {
     },
   });
   console.log(petsNamedAlice);
+
+  // Log any pet that belongs to a user that is 17 years old
+
+  const petsThatBelongTo17YearOld = await prisma.pet.findMany({
+    where: {
+      owner: {
+        age: 17,
+      },
+    },
+  });
+  console.log(petsThatBelongTo17YearOld);
 };
 
 runQuery();
