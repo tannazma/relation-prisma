@@ -80,9 +80,23 @@ const AllSongsLikedByMoreThan1User = async () => {
   });
   console.log(allSongsLiked);
 };
+// Find all users who like more than one song.
 
+const AllUsersLikedByMoreThan1Song = async () => {
+  const allSongsLiked = await prisma.user.findMany({
+    where: {
+      likes: {
+        some: {},
+      },
+    },
+    include: {
+      likes: true,
+    },
+  });
+  console.log(allSongsLiked);
+};
 // addSongLike();
 // queryLikes();
 // AllUsersLikeSong1();
 // AllSongsLikedByAlice();
-AllSongsLikedByMoreThan1User();
+AllUsersLikedByMoreThan1Song();
