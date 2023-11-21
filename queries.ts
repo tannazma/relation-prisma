@@ -33,6 +33,7 @@ const runQuery = async () => {
       },
     },
   });
+
   // if Alice decides that no longer be the owner of Garfield cat
   await prisma.pet.update({
     where: {
@@ -44,6 +45,16 @@ const runQuery = async () => {
       },
     },
   });
+
+  // Which pets are owned by the user that has the name 'Alice'?
+  const petsNamedAlice = await prisma.pet.findMany({
+    where: {
+      owner: {
+        name: "Alice",
+      },
+    },
+  });
+  console.log(petsNamedAlice);
 };
 
 runQuery();
