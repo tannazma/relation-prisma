@@ -1,18 +1,14 @@
-{
-  "id": 1,
-  "title": "My First Post",
-  "categories": [
-    {
-      "postId": 1,
-      "categoryId": 1,
-      "assignedAt": "2022-01-01T00:00:00.000Z",
-      "assignedBy": "admin"
-    },
-    {
-      "postId": 1,
-      "categoryId": 2,
-      "assignedAt": "2022-01-01T00:00:00.000Z",
-      "assignedBy": "admin"
-    }
-  ]
-}
+[
+  {
+    "title": "My First Post"
+  },
+  {
+    "title": "My second Post"
+  },
+  {
+    "title": "My third Post"
+  },
+  {
+    "title": "My Fourth Post"
+  }
+]

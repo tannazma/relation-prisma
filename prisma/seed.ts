@@ -3,56 +3,19 @@ const prisma = new PrismaClient();
 
 import pets from "../pet.json";
 import owners from "../owner.json";
-import posts from "./data/post.json"
-import category from "./data/category.json"
-import categoryOnPosts from "./data/categoryOnPosts.json"
+import posts from "./data/post.json";
+import category from "./data/category.json";
 
 const seed = async () => {
   for (let i = 0; i < pets.length; i += 1) {
     const petData = pets[i];
-    if (petData) {
-      await prisma.pet.create({ data: petData });
-    }
+    await prisma.pet.create({ data: petData });
   }
-
-  //   seedData.pets.forEach(async (pet) => {
-  //     const { kind, name } = pet;
-  //     const insertPet = await prisma.pet.create({
-  //       data: {
-  //         name,
-  //         kind,
-  //       },
-  //     });
-  //   });
-  for (let i = 0; i < owners.length; i+=1) {
+  for (let i = 0; i < owners.length; i += 1) {
     const ownerData = owners[i];
-    if (ownerData) {
-    }
     await prisma.owner.create({
       data: ownerData,
     });
-  }
-  try {
-    const user1 = await prisma.user.create({
-      data: {
-        name: "Alice",
-        likes: {
-          create: [
-            {
-              title: "Song 1",
-              artists: "Artist 1",
-            },
-            {
-              title: "Song 2",
-              artists: "Artist 2",
-            },
-          ],
-        },
-      },
-    });
-    console.log(user1);
-  } catch (error) {
-    console.log(error);
   }
 
   try {
@@ -76,6 +39,85 @@ const seed = async () => {
     console.log(user2);
   } catch (error) {
     console.log(error);
+  }
+
+  try {
+    const user1 = await prisma.user.create({
+      data: {
+        name: "Alice",
+        likes: {
+          create: [
+            {
+              title: "Song 1",
+              artists: "Artist 1",
+            },
+            {
+              title: "Song 2",
+              artists: "Artist 2",
+            },
+          ],
+        },
+      },
+    });
+    console.log(user1);
+  } catch (error) {
+    console.log(error);
+  }
+
+  for (let i = 0; i < posts.length; i += 1) {
+    const createdPost = posts[i];
+    await prisma.post.create({
+      data: createdPost,
+    });
+    console.log(createdPost);
+  }
+
+  for (let i = 0; i < category.length; i += 1) {
+    const createdCategory = category[i];
+    await prisma.category.create({
+      data: createdCategory,
+    });
+    console.log(createdCategory);
+  }
+
+  // creating data manually:
+
+  //   await prisma.categoriesOnPosts.create({
+  //     data: {
+  //       categoryId: 4,
+  //       postId: 9,
+  //       assignedBy: "tann",
+  //     },
+  //   });
+
+  // creating many-to-many relation :
+
+  const createdPosts = await prisma.post.findMany();
+  const createdCategories = await prisma.category.findMany();
+
+  console.log(createdPosts);
+  console.log(createdCategories);
+
+  for (let i = 0; i < createdPosts.length; i++) {
+    for (let j = 0; j < createdCategories.length; j++) {
+      await prisma.categoriesOnPosts.create({
+        data: {
+          postId: createdPosts[i].id,
+          //   post: {
+          //     connect: {
+          //       id: createdPosts[i].id,
+          //     },
+          // },
+          categoryId: createdCategories[j].id,
+          // category: {
+          // connect: {
+          //     id: createdCategories[j].id,
+          //   },
+          // },
+          assignedBy: "Seeder", // Replace 'Seeder' with the actual user who assigns the category to the post
+        },
+      });
+    }
   }
 };
 seed();
