@@ -18,6 +18,21 @@ const runQuery = async () => {
   } catch (error) {
     console.log(error);
   }
+
+  // To connect an existing Pet to an existing Owner:
+
+  await prisma.pet.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      owner: {
+        connect: {
+          id: 1,
+        },
+      },
+    },
+  });
 };
 
 runQuery();
