@@ -38,20 +38,20 @@ async function queryLikes() {
 // Find all users who like the song with the title "Song 1".
 
 const AllUsersLikeSong1 = async () => {
-    try {
-      const songs = await prisma.song.findMany({
-        where: {
-          title: "Song 1",
-        },
-        include: {
-          likedByUser: true,
-        },
-      });
-      console.log(songs);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  try {
+    const songs = await prisma.song.findMany({
+      where: {
+        title: "Song 1",
+      },
+      include: {
+        likedByUser: true,
+      },
+    });
+    console.log(songs);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Find all songs liked by the user with the name "Alice".
 
@@ -66,6 +66,23 @@ const AllSongsLikedByAlice = async () => {
   });
   console.log(userNamedAlice);
 };
+// Find all songs liked by more than one user
+const AllSongsLikedByMoreThan1User = async () => {
+  const allSongsLiked = await prisma.song.findMany({
+    where: {
+      likedByUser: {
+        some: {},
+      },
+    },
+    include: {
+      likedByUser: true,
+    },
+  });
+  console.log(allSongsLiked);
+};
+
 // addSongLike();
 // queryLikes();
-AllSongsLikedByAlice();
+// AllUsersLikeSong1();
+// AllSongsLikedByAlice();
+AllSongsLikedByMoreThan1User();
