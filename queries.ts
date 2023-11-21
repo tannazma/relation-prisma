@@ -120,6 +120,18 @@ const runQuery = async () => {
   } else {
     console.log("not found");
   }
+
+  //  using single query with include method to find Alice's pets
+
+  const allAlicePets2 = await prisma.owner.findFirst({
+    where: {
+      name: "Alice",
+    },
+    include: {
+      pets: true,
+    },
+  });
+  console.log(allAlicePets2);
 };
 
 runQuery();
