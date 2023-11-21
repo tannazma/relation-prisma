@@ -96,6 +96,30 @@ const runQuery = async () => {
       },
     },
   });
+
+  // Hard to me
+  // to get the Owner that has the name 'Alice' and all her pets
+
+  const petOwnerNamedAlice = await prisma.owner.findFirst({
+    where: {
+      name: "Alice",
+    },
+  });
+
+  console.log(petOwnerNamedAlice);
+
+  if (petOwnerNamedAlice) {
+    const allAlicePets = await prisma.pet.findMany({
+      where: {
+        owner: {
+          id: petOwnerNamedAlice.id,
+        },
+      },
+    });
+    console.log(allAlicePets);
+  } else {
+    console.log("not found");
+  }
 };
 
 runQuery();
