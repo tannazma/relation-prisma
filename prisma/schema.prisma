@@ -10,14 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// one-to-many relation where every pet can have one owner
+// and every owner can have multiple pets 
+// add ? to maybe every pet doesn't have owner
+
 model Pet {
-  id   Int    @id @default(autoincrement())
-  name String
-  kind String
+  id      Int    @id @default(autoincrement())
+  name    String
+  kind    String
+  owner   Owner? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
 }
 
 model Owner {
   id   Int    @id @default(autoincrement())
   name String
   age  Int
+  pets Pet[]
 }
