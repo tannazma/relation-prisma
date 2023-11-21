@@ -33,6 +33,17 @@ const runQuery = async () => {
       },
     },
   });
+  // if Alice decides that no longer be the owner of Garfield cat
+  await prisma.pet.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      owner: {
+        disconnect: true,
+      },
+    },
+  });
 };
 
 runQuery();
