@@ -32,5 +32,50 @@ const seed = async () => {
       data: ownerData,
     });
   }
+  try {
+    const user1 = await prisma.user.create({
+      data: {
+        name: "Alice",
+        likes: {
+          create: [
+            {
+              title: "Song 1",
+              artists: "Artist 1",
+            },
+            {
+              title: "Song 2",
+              artists: "Artist 2",
+            },
+          ],
+        },
+      },
+    });
+    console.log(user1);
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    const user2 = await prisma.user.create({
+      data: {
+        name: "Bob",
+        likes: {
+          create: [
+            {
+              title: "Song 3",
+              artists: "Artist 3",
+            },
+            {
+              title: "Song 4",
+              artists: "Artist 4",
+            },
+          ],
+        },
+      },
+    });
+    console.log(user2);
+  } catch (error) {
+    console.log(error);
+  }
 };
 seed();
