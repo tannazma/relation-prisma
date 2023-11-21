@@ -53,6 +53,19 @@ const AllUsersLikeSong1 = async () => {
     }
   };
 
+// Find all songs liked by the user with the name "Alice".
+
+const AllSongsLikedByAlice = async () => {
+  const userNamedAlice = await prisma.user.findMany({
+    where: {
+      name: "Alice",
+    },
+    include: {
+      likes: true,
+    },
+  });
+  console.log(userNamedAlice);
+};
 // addSongLike();
 // queryLikes();
-AllUsersLikeSong1();
+AllSongsLikedByAlice();
