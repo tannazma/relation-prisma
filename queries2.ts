@@ -20,4 +20,21 @@ async function addSongLike() {
   }
 }
 
-addSongLike();
+async function queryLikes() {
+  try {
+    const userWithLikes = await prisma.user.findUnique({
+      where: {
+        id: 1,
+      },
+      include: {
+        likes: true,
+      },
+    });
+    console.log(userWithLikes);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// addSongLike();
+queryLikes();
