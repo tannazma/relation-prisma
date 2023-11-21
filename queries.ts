@@ -132,6 +132,18 @@ const runQuery = async () => {
     },
   });
   console.log(allAlicePets2);
+
+  //   include owner when querying pet
+
+  const petWithOwner = await prisma.pet.findUnique({
+    where: {
+      id: 1,
+    },
+    include: {
+      owner: true,
+    },
+  });
+  console.log(petWithOwner);
 };
 
 runQuery();
