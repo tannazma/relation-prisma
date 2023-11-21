@@ -1,0 +1,14 @@
+{
+  "post": {
+    "id": 1,
+    "title": "My First Post"
+  },
+  "postId": 1,
+  "category": {
+    "id": 1,
+    "name": "Programming"
+  },
+  "categoryId": 1,
+  "assignedAt": "2022-01-01T00:00:00.000Z",
+  "assignedBy": "admin"
+}

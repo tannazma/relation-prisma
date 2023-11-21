@@ -3,6 +3,9 @@ const prisma = new PrismaClient();
 
 import pets from "../pet.json";
 import owners from "../owner.json";
+import posts from "./data/post.json"
+import category from "./data/category.json"
+import categoryOnPosts from "./data/categoryOnPosts.json"
 
 const seed = async () => {
   for (let i = 0; i < pets.length; i += 1) {
