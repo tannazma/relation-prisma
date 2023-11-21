@@ -82,6 +82,20 @@ const runQuery = async () => {
     },
   });
   console.log(newOwnerWithAPet);
+
+  //  Log all the owners that own a Bird
+  // If you used none: { kind: "Bird" },
+  // it would return owners who do not have any pets of kind "Bird".
+
+  const ownersThatOwnABird = await prisma.owner.findMany({
+    where: {
+      pets: {
+        some: {
+          kind: "Bird",
+        },
+      },
+    },
+  });
 };
 
 runQuery();
